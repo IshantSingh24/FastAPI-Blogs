@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="content-section py-4 px-4 mb-4">
+    <h1 class="mb-3">{{ status_code }} - {{ title }}</h1>
+    <p class="article-content mb-4">{{ message }}</p>
+    <a class="btn btn-outline-primary" href="{{ url_for('home') }}">Back to Home</a>
+  </article>
+{% endblock content %}
