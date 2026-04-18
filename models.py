@@ -20,7 +20,10 @@ class User(Base):
 		default=None,
 	)
 
-	posts: Mapped[list[Post]] = relationship(back_populates="author")
+	posts: Mapped[list[Post]] = relationship(
+		back_populates="author",
+		cascade="all, delete-orphan",
+	)
 
 
 class Post(Base):
@@ -30,7 +33,7 @@ class Post(Base):
 	title: Mapped[str] = mapped_column(String(100), nullable=False)
 	content: Mapped[str] = mapped_column(Text, nullable=False)
 	user_id: Mapped[int] = mapped_column(
-		ForeignKey("users.id"),
+		ForeignKey("users.id", ondelete="CASCADE"),
 		nullable=False,
 		index=True,
 	)
