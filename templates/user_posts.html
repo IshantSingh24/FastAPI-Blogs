@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="content-section py-3 px-4 mb-4">
+    <h1 class="h4 mb-1">Posts by {{ user.username }}</h1>
+    <p class="text-body-secondary mb-0">{{ posts|length }} post(s)</p>
+  </article>
+
+  {% if posts %}
+    {% for post in posts %}
+      <article class="content-section py-3 px-4 mb-4">
+        <div class="article-metadata mb-2">
+          <a class="me-2" href="{{ url_for('user_posts', user_id=user.id) }}">{{ user.username }}</a>
+          <small class="text-body-secondary">{{ post.date_posted.strftime('%b %d, %Y at %I:%M %p') }}</small>
+        </div>
+        <h2>
+          <a class="article-title" href="{{ url_for('post-detail', post_id=post.id) }}">{{ post.title }}</a>
+        </h2>
+        <p class="article-content">{{ post.content }}</p>
+      </article>
+    {% endfor %}
+  {% else %}
+    <article class="content-section py-3 px-4 mb-4">
+      <p class="mb-0">No posts yet.</p>
+    </article>
+  {% endif %}
+{% endblock content %}
